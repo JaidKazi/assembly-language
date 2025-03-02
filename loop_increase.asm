@@ -4,8 +4,8 @@
 
 org 100h
 
-mov cx, 9  ; loop counter
-mov dl, '9'  ; starting value to print 9
+mov cx, 5  ; loop counter
+mov dl, '1'  ; starting value to print 9
 
 start_loop:  ; label for the loop
     mov ah, 02h  ; function to print the character in dl
