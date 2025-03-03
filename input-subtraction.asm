@@ -1,25 +1,27 @@
+org 100h       ; Start of the program
 
-; You may customize this and other start-up templates; 
-; The location of this template is c:\emu8086\inc\0_com_template.txt
+; Read first number from user
+mov ah, 01h    ; DOS interrupt for single character input
+int 21h        ; Get first digit
+sub al, '0'    ; Convert ASCII to integer
+mov bl, al     ; Store first number in BL
 
-org 100h
+; Read second number from user
+mov ah, 01h    ; DOS interrupt for single character input
+int 21h        ; Get second digit
+sub al, '0'    ; Convert ASCII to integer
 
-    mov ah, 01h
-    int 21h
-    sub al, 30h 
-    
-    mov bl, al  
-    mov ah, 01h 
-    int 21h
-    sub al, 30h
+; Perform subtraction: BL - AL
+mov bh, 0      ; Clear BH to avoid sign extension issues
+sub bl, al     ; BL = BL - AL
 
-sub bl, al
-mov dl, bl
-add dl, "0"
-mov ah, 02h
-int 21h
-ret
+; Convert result to ASCII
+mov al, bl     ; Move result to AL
+add al, '0'    ; Convert to ASCII
 
+; Display result
+mov dl, al     ; Move ASCII result to DL
+mov ah, 02h    ; DOS function to print character
+int 21h        ; Print result
 
-
-
+ret            ; End of program
